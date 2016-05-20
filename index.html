@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R Shiny application &amp; Titanic prediction</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R Shiny application &amp; Titanic prediction">
+  <meta name="author" content="Molina Rafidison">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>R Shiny application &amp; Titanic prediction</h1>
+    <h2>Would you survive from the Titanic disaster?</h2>
+    <p>Molina Rafidison<br/>Data products</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>WHY</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The reason why this application was made:  </p>
+
+<ul>
+<li>To try out reproducible data products<br></li>
+<li>To understand how R Shiny works<br></li>
+<li>To test machine learning in an application<br></li>
+<li>To have fun and play!<br></li>
+</ul>
+
+<p>Feel free to play with it at the <a href="http://theyanike.shinyapps.io/titanic-app">following link</a>.  </p>
+
+<p><strong>Note: The accuracy of the model used for the prediction is not 100% accurate.</strong></p>
+
+<p>This project is included in the Data products course from the Data Science Specialization.<br>
+It is supplied by John Hopkins University on Coursera.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="what" style="background:;">
+  <hgroup>
+    <h2>WHAT</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The application is based on the <code>Titanic</code> dataset availaible in the <code>datasets</code> package.</p>
+
+<pre><code class="r">library(datasets); data(Titanic)
+
+Titanic &lt;- as.data.frame(Titanic)
+rows &lt;- rep(1:nrow(Titanic) ,Titanic[ , 5])
+Titanic &lt;- Titanic[rows, -5]
+
+head(Titanic, 2)
+</code></pre>
+
+<pre><code>##     Class  Sex   Age Survived
+## 3     3rd Male Child       No
+## 3.1   3rd Male Child       No
+</code></pre>
+
+<p>The application tells whether one would have survived from the Titanic disaster based on the gender, the age and the class prefered. It aims to be simple and fun!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="how" style="background:;">
+  <hgroup>
+    <h2>HOW</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The output is computed thanks to a machine learning algorithm, <code>randomForest</code>.</p>
+
+<p>The model is trained on the original dataset and it then computes the predicted result according to the player&#39;s inputs.<br>
+The inputs are converted to be run in the following algorithm:</p>
+
+<pre><code class="r">rfModel &lt;- randomForest(Survived ~ ., data = Titanic, mtry = 2)
+</code></pre>
+
+<p>The first answer is a &quot;Yes&quot; if one survives or a &quot;No&quot; if not.
+The second is the probability to survive if &quot;Yes&quot; or to die if &quot;No&quot;.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="play" style="background:;">
+  <hgroup>
+    <h2>WANT TO PLAY?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The intructions are very simple!</p>
+
+<p>Don&#39;t pay attention to the first results that are displayed. They correspond to the default inputs.  </p>
+
+<ol>
+<li>Follow the three steps in the left sidebar of the application. You will have to enter a gender, an age and a class.</li>
+<li>Then click on the &#39;Embark&#39; button to submit your inputs. For information, there is no data collected on this page.</li>
+<li>See how your inputs are converted on the right and read the answer you were waiting for! </li>
+</ol>
+
+<p>Good luck!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='WHY'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='WHAT'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='HOW'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='WANT TO PLAY?'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
